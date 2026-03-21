@@ -14,6 +14,56 @@ The agents work together to:
 - **Quote Generation** — Produce accurate, competitive quotes for customers by consulting historical quote data and applying appropriate pricing strategies.
 - **Sales Transactions** — Finalize sales based on available inventory and estimated delivery timelines.
 
+## Agent Workflow
+
+```mermaid
+flowchart TD
+    Customer(["👤 Customer"])
+
+    subgraph Orchestrator["🧠 Orchestrator Agent\nRoutes inquiry · Holds conversation state · Synthesizes final reply"]
+        OA["Classify intent → delegate to specialist\nCollect specialist result → reply to customer"]
+    end
+
+    subgraph InventoryAgent["📦 Inventory Agent\nAnswers stock questions · Triggers reorders when stock is low"]
+        T1["🔧 check_inventory\nPurpose: look up current stock for a paper type\nHelpers: get_stock_level(item_name, date)\n         get_all_inventory(as_of_date)"]
+        T2["🔧 reorder_stock\nPurpose: place a supplier order and record it\nHelpers: get_supplier_delivery_date(date, qty)\n         create_transaction(item, 'stock_orders', qty, price, date)"]
+    end
+
+    subgraph QuoteAgent["💰 Quote Agent\nBuilds competitive quotes · Applies bulk discounts"]
+        T3["🔧 get_quote_history\nPurpose: retrieve similar past quotes for context\nHelper: search_quote_history(search_terms, limit)"]
+        T4["🔧 calculate_quote\nPurpose: compute total price with bulk discount tiers\nHelpers: get_stock_level(item_name, date)\n         get_cash_balance(as_of_date)"]
+    end
+
+    subgraph SalesAgent["🛒 Sales Agent\nFinalizes transactions · Advises delivery timelines"]
+        T5["🔧 check_delivery_timeline\nPurpose: estimate supplier delivery date by order size\nHelper: get_supplier_delivery_date(date, quantity)"]
+        T6["🔧 fulfill_order\nPurpose: deduct stock and record the sale\nHelpers: get_stock_level(item_name, date)\n         create_transaction(item, 'sales', qty, price, date)"]
+    end
+
+    DB[("🗄️ SQLite DB\ntransactions · inventory\nquotes · quote_requests")]
+
+    Customer -- "Text inquiry" --> OA
+
+    OA -- "item_name, as_of_date" --> T1
+    OA -- "item_name, qty, date" --> T2
+    OA -- "search_terms" --> T3
+    OA -- "item_name, qty, date" --> T4
+    OA -- "item_name, qty, date" --> T5
+    OA -- "item_name, qty, price, date" --> T6
+
+    T1 -- "current_stock, needs_reorder?" --> OA
+    T2 -- "order_id, delivery_date" --> OA
+    T3 -- "matching quotes list" --> OA
+    T4 -- "unit_price, discount, total" --> OA
+    T5 -- "estimated delivery date" --> OA
+    T6 -- "transaction_id, confirmation" --> OA
+
+    OA -- "Final response" --> Customer
+
+    T1 & T2 <--> DB
+    T3 & T4 <--> DB
+    T5 & T6 <--> DB
+```
+
 ## Project Structure
 
 TODO
