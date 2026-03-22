@@ -92,9 +92,16 @@ erDiagram
 ```
 
 
-
 ## Eval Results Discussion
 
+The system was evaluated by running `run_test_scenarios()` against `quote_requests_sample.csv`, which contains a chronologically ordered set of customer requests. Each request was routed through the orchestrator and processed end-to-end. After each run, the financial state (cash balance and inventory value) was recalculated using `generate_financial_report()` and logged to `test_results.csv`.
 
+The orchestrator correctly classified most requests and delegated to the appropriate specialist agent. The inventory agent reliably triggered reorders when stock fell at or below the minimum level, and the quote agent consistently applied the correct bulk discount tier. The sales agent confirmed delivery timelines before finalizing transactions and properly rejected fulfillment attempts when stock was insufficient.
+
+One key observation is that the quality of the orchestrator's routing depends heavily on how clearly the customer's intent is phrased in the request. Ambiguous requests, for example, one that mentions both a quantity and asks about availability; sometimes caused the orchestrator to route to only one agent when two were needed. This is a limitation of the single-pass delegation model and is discussed further under Future Improvements.
 
 ## Future Improvements
+
+**1. Multi-turn clarification loop.** Currently the orchestrator processes each request in a single pass — it interprets intent, delegates, and returns a response. A useful improvement would be allowing the orchestrator to ask the customer a clarifying question when the intent is ambiguous (e.g., "Are you looking for a quote, or do you want to complete a purchase?") before delegating. This would reduce misrouting on underspecified requests without requiring changes to the specialist agents.
+
+**2. Output validation via a dedicated checker function.** While smolagents already enforces a ReAct loop, there is no post-hoc check that the orchestrator's final response actually answers the customer's original question. A second LLM call acting as a critic, could catch hallucinated or incomplete answers before they are returned. This would be most valuable in a production setting where response quality needs to be auditable.

@@ -66,7 +66,7 @@ flowchart TD
 
 ## Project Structure
 
-TODO
+`docs` folder has the `reflection-report.md` and `test_results.csv`
 
 ## Tech Stack
 
@@ -77,11 +77,6 @@ TODO
 | Database | `sqlite3` (built-in) |
 | Input / Output | Text-based only |
 
-## Deliverables
-
-- [ ] Workflow diagram (image file) showing the multi-agent architecture
-- [ ] `main.py` — complete multi-agent implementation
-- [ ] This README / project documentation
 
 ## Project Steps
 
@@ -93,5 +88,5 @@ TODO
 ## Getting Started
 
 ```bash
-TODO
+uv run python project_solution.py
 ```
