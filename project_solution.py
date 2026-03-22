@@ -172,14 +172,14 @@ def init_database(db_engine: Engine, seed: int = 137) -> Engine:
         # ----------------------------
         # 2. Load and initialize 'quote_requests' table
         # ----------------------------
-        quote_requests_df = pd.read_csv("quote_requests.csv")
+        quote_requests_df = pd.read_csv("docs/quote_requests.csv")
         quote_requests_df["id"] = range(1, len(quote_requests_df) + 1)
         quote_requests_df.to_sql("quote_requests", db_engine, if_exists="replace", index=False)
 
         # ----------------------------
         # 3. Load and transform 'quotes' table
         # ----------------------------
-        quotes_df = pd.read_csv("quotes.csv")
+        quotes_df = pd.read_csv("docs/quotes.csv")
         quotes_df["request_id"] = range(1, len(quotes_df) + 1)
         quotes_df["order_date"] = initial_date
 
@@ -597,7 +597,7 @@ def search_quote_history(search_terms: List[str], limit: int = 5) -> List[Dict]:
 model = OpenAIServerModel(
     model_id='gpt-5.4-mini',
     api_key=os.getenv("OPENAI_API_KEY"),
-    base_url=os.getenv("BASE_URL"),
+    api_base=os.getenv("BASE_URL"),
 )
 
 # ---------------------------------------------------------------------------
@@ -833,12 +833,15 @@ def fulfill_order(item_name: str, quantity: int, unit_price: float, sale_date: s
 inventory_agent = ToolCallingAgent(
     tools=[check_inventory, reorder_stock],
     model=model,
-    # TODO: Write a system prompt that tells this agent its role:
-    #   - It is a specialist in stock levels and supply replenishment
-    #   - It should check stock before recommending a reorder
-    #   - It should only reorder when stock is at or below the minimum level
-    #   - It should always return structured text so the orchestrator can interpret results
-    system_prompt="",
+    instructions=(
+        "You are an inventory specialist for Beaver's Choice Paper Company.\n"
+        "Your job is to check stock levels and place restock orders when needed.\n\n"
+        "Rules:\n"
+        "- Always call check_inventory BEFORE deciding to reorder.\n"
+        "- Only call reorder_stock when current stock is at or below the minimum stock level.\n"
+        "- When restocking, order enough to comfortably exceed the minimum level.\n"
+        "- Always return clear, structured text so the orchestrator can interpret your result."
+    ),
     name="inventory_agent",
     description="Checks inventory levels and places restock orders when supplies run low.",
 )
@@ -846,12 +849,15 @@ inventory_agent = ToolCallingAgent(
 quote_agent = ToolCallingAgent(
     tools=[get_quote_history, calculate_quote],
     model=model,
-    # TODO: Write a system prompt that tells this agent its role:
-    #   - It is a pricing and quoting specialist
-    #   - It should consult quote history before generating a new quote
-    #   - It must apply bulk discount tiers consistently
-    #   - It should never quote more items than are currently in stock
-    system_prompt="",
+    instructions=(
+        "You are a pricing and quoting specialist for Beaver's Choice Paper Company.\n"
+        "Your job is to generate accurate, competitive quotes for customer orders.\n\n"
+        "Rules:\n"
+        "- Always call get_quote_history first to check how similar orders were priced before.\n"
+        "- Apply bulk discount tiers exactly as defined in calculate_quote.\n"
+        "- Never quote a quantity greater than what is currently in stock.\n"
+        "- Return the unit price, discount percentage, and final total clearly in your response."
+    ),
     name="quote_agent",
     description="Generates competitive price quotes and applies bulk discount tiers.",
 )
@@ -859,27 +865,34 @@ quote_agent = ToolCallingAgent(
 sales_agent = ToolCallingAgent(
     tools=[check_delivery_timeline, fulfill_order],
     model=model,
-    # TODO: Write a system prompt that tells this agent its role:
-    #   - It is a sales and fulfilment specialist
-    #   - It must check delivery timeline before confirming a sale to the customer
-    #   - It must only call fulfill_order once the customer has confirmed the quoted price
-    #   - It should report the transaction ID and delivery date in its response
-    system_prompt="",
+    instructions=(
+        "You are a sales and fulfilment specialist for Beaver's Choice Paper Company.\n"
+        "Your job is to close sales and advise customers on when their order will arrive.\n\n"
+        "Rules:\n"
+        "- Always call check_delivery_timeline before confirming a sale so the customer knows the ETA.\n"
+        "- Only call fulfill_order after the customer has agreed to the quoted price.\n"
+        "- fulfill_order will reject the transaction if stock is insufficient — report that clearly if it happens.\n"
+        "- Always include the transaction ID and delivery date in your final response."
+    ),
     name="sales_agent",
     description="Finalises sales transactions and advises customers on delivery timelines.",
 )
 
 orchestrator = ToolCallingAgent(
-    # TODO: Orchestrator has no direct DB tools — it delegates to managed agents
     tools=[],
     model=model,
-    # TODO: Write a system prompt that tells this agent its role:
-    #   - It is the customer-facing representative of Beaver's Choice Paper Company
-    #   - It classifies each incoming request (inventory query / quote request / purchase)
-    #   - It delegates to the correct specialist agent and relays results to the customer
-    #   - Typical flow: check inventory → generate quote → confirm delivery → fulfill order
-    #   - It should synthesise all specialist responses into a single, friendly reply
-    system_prompt="",
+    instructions=(
+        "You are the customer-facing representative of Beaver's Choice Paper Company.\n"
+        "Your job is to handle incoming customer requests about paper products and coordinate specialist agents to fulfil them.\n\n"
+        "Workflow:\n"
+        "1. Understand the customer's need: stock inquiry, quote request, or purchase.\n"
+        "2. For stock questions: delegate to inventory_agent.\n"
+        "3. For quotes: delegate to quote_agent (it will check history and calculate a price).\n"
+        "4. For purchases: delegate to sales_agent to confirm delivery timeline and complete the transaction.\n"
+        "5. For a full sales flow, follow this order: inventory_agent → quote_agent → sales_agent.\n"
+        "6. Synthesise all specialist responses into a single, friendly, professional reply to the customer.\n\n"
+        "Always be concise, helpful, and accurate. Do not invent prices or stock levels."
+    ),
     managed_agents=[inventory_agent, quote_agent, sales_agent],
 )
 
@@ -889,9 +902,9 @@ orchestrator = ToolCallingAgent(
 def run_test_scenarios():
     
     print("Initializing Database...")
-    init_database()
+    init_database(db_engine)
     try:
-        quote_requests_sample = pd.read_csv("quote_requests_sample.csv")
+        quote_requests_sample = pd.read_csv("docs/quote_requests_sample.csv")
         quote_requests_sample["request_date"] = pd.to_datetime(
             quote_requests_sample["request_date"], format="%m/%d/%y", errors="coerce"
         )
@@ -938,11 +951,8 @@ def run_test_scenarios():
         ############
         ############
         ############
-        # TODO: Call orchestrator.run(request_with_date) to process the customer request.
-        #       Assign the return value to `response`.
-        #       The orchestrator will delegate to inventory_agent, quote_agent, or sales_agent
-        #       as needed and return a synthesised plain-text reply.
-        # response = orchestrator.run(request_with_date)
+        # Run the request through the orchestrator
+        response = orchestrator.run(request_with_date)
 
         # Update state
         report = generate_financial_report(request_date)

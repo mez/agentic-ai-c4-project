@@ -1,0 +1,147 @@
+request_id,request_date,cash_balance,inventory_value,response
+1,2025-04-01,45059.7,4940.299999999999,"Thank you — we checked your request for:
+- 200 sheets of A4 glossy paper
+- 100 sheets of heavy cardstock (white)
+- 100 sheets of colored paper (assorted colors)
+
+All three items are currently out of stock, and restock attempts could not be completed because the exact item names were not found in the system. Based on the current inventory status, we’re not able to fulfill this order by April 15, 2025.
+
+If you’d like, we can help look for acceptable substitutions or confirm the exact product names/SKUs to try again."
+2,2025-04-03,45059.7,4940.299999999999,"Thanks for your order request. We’re unable to finalize the purchase right now because all requested items are out of stock and there’s no historical quote on file. A restock would be required before we can confirm pricing and provide a firm delivery date. Once inventory is replenished, we can revisit your request and check whether the April 15, 2025 delivery target is still achievable."
+3,2025-04-04,45059.7,4940.299999999999,"I’m sorry, but I can’t confirm the order as requested because fulfillment failed due to insufficient stock.
+
+Delivery timing was acceptable for your deadline of 2025-04-15:
+- 500 reams of printer paper: estimated delivery 2025-04-08
+- 10,000 sheets of A4 paper: estimated delivery 2025-04-11
+- 5,000 sheets of A3 paper: estimated delivery 2025-04-11
+
+However, available stock was too low to complete the sale:
+- Printer paper: 0 units available
+- A3 paper: 0 units available
+- A4 paper: 272 units available
+
+No transaction was completed, so there is no order confirmation number. If you’d like, I can help with a partial order, revised quantities, or alternative paper products that are in stock."
+4,2025-04-05,45059.7,4940.299999999999,"Thanks for your patience. The order can be delivered by April 15, 2025 — the estimated delivery date is April 9, 2025. However, I’m not able to finalise the sale yet because the exact internal product names and a valid quote are still needed, and the attempted fulfilment failed for the cardstock item due to a stock mismatch on the entered name. If you can provide the exact internal product names for the recycled cardstock and A4 printer paper, I can help complete the order."
+5,2025-04-05,45059.7,4940.299999999999,"Thank you for your order request. At this time, we’re unable to confirm fulfillment because the requested paper and tape items are currently out of stock, and our inventory system could not match the customer-facing item names/SKUs for reorder. As a result, we cannot reliably commit to the requested delivery date of 2025-04-15 yet. We’re working to resolve the item mapping issue and will update you as soon as we can confirm availability and a revised delivery timeline."
+6,2025-04-06,45059.7,4940.299999999999,"Thanks for your order request. Unfortunately, we can’t complete the purchase right now because all requested items are currently out of stock, and a final sale quote can’t be issued until inventory is replenished.
+
+Requested items:
+- 500 sheets of colorful construction paper
+- 300 sheets of white printer paper
+- 200 sheets of cardstock in various colors
+
+Delivery guidance:
+- If stock were available, the requested timeline would be feasible.
+- Estimated delivery date guidance was 2025-04-10, which is before your needed-by date of 2025-04-15.
+
+Next step:
+- Once stock is replenished, we can revisit pricing and complete the order."
+7,2025-04-07,45059.7,4940.299999999999,"Thanks — I’m sorry, but I can’t confirm this order yet. All requested items are currently out of stock, and the restock attempts failed because the exact product names weren’t recognized by the inventory system.
+
+For reference, the delivery check we have suggests 500 units could arrive by 2025-04-11 from a 2025-04-07 request, which is before your requested deadline of 2025-04-15. However, that does not solve the stock issue, so the order still can’t be completed as requested.
+
+If you can send the exact SKU codes or internal product names for:
+- glossy A4 paper
+- matte A3 paper
+- poster boards (24"" x 36"")
+- heavyweight cardstock
+
+we can retry the inventory lookup and restock process right away."
+8,2025-04-07,45059.7,4940.299999999999,"Thank you for your order request. Unfortunately, all requested items are currently out of stock, so I’m unable to complete the purchase right now.
+
+Items requested:
+- 500 sheets of A4 glossy paper
+- 1000 sheets of A4 matte paper
+- 2000 sheets of A5 colored paper
+- 3000 sheets of A4 recycled paper
+
+Key notes:
+- Stock is unavailable for all four items as of 2025-04-07.
+- A quote could not be finalized due to stock/master-data issues.
+- The sales flow could not be completed, so no transaction was created.
+- If stock were available, the estimated delivery date would have been 2025-04-14, which would have met your requested delivery date of 2025-04-15.
+
+Please let us know if you’d like us to proceed once stock is replenished or if you can consider alternate paper specifications."
+9,2025-04-07,45059.7,4940.299999999999,"Thank you for your order request. Unfortunately, we’re unable to complete it as requested because all three items are currently out of stock:
+- 200 sheets of A4 white printer paper
+- 100 sheets of A3 glossy paper
+- 50 packets of 100% recycled kraft paper envelopes
+
+In addition, the requested delivery date of 2025-04-10 is not feasible; the earliest estimated delivery provided was 2025-04-11, assuming stock were available. We also could not generate a valid quote due to the inventory mismatch.
+
+If you’d like, I can help you explore substitute products or proceed once the exact catalog/SKU names are confirmed for restocking."
+13,2025-04-08,45059.7,4940.299999999999,"Thanks for your order request. We’re unable to meet the requested delivery date of 2025-04-10 under normal fulfilment, and both items are currently out of stock in the inventory system as entered.
+
+Requested items:
+- 500 sheets of A4 printing paper
+- 200 sheets of cardstock
+
+Current status:
+- Inventory could not confirm stock for either item
+- No restock order was successfully placed because the system did not recognize the item names exactly as provided
+- Estimated delivery under normal fulfilment: 2025-04-12
+
+If you'd like, I can help you confirm the exact product names/SKUs so we can try again, or we can discuss a revised delivery date."
+12,2025-04-08,45059.7,4940.299999999999,"Thanks for your order request. Unfortunately, we can’t complete it as requested because all three items are currently out of stock in the inventory system: 200 sheets of colorful cardstock, 500 sheets of standard printer paper, and 100 paper napkins.
+
+For timing, the quantity you requested would normally allow delivery by 2025-04-12, which is before your requested date of 2025-04-15. However, stock availability is the blocking issue, so the order cannot be finalized right now.
+
+If you'd like, we can help once inventory is replenished or you can confirm substitute item names/SKUs."
+10,2025-04-08,45059.7,4940.299999999999,"Thanks for your order request. I’ve checked inventory and both items are currently out of stock: 500 sheets of high-quality glossy paper and 300 sheets of sturdy cardstock.
+
+The good news is the delivery window is still feasible by April 15, 2025 if restocking happens immediately — our sales team estimates a potential delivery date of April 12, 2025. However, the order cannot be finalized yet because stock is unavailable.
+
+If you’d like, I can help coordinate the restock and then proceed as soon as inventory is replenished."
+11,2025-04-08,45059.7,4940.299999999999,"Thanks for your request. We’ve checked the items: both are currently out of stock, and the inventory system could not match the exact product names needed to place restock orders.
+
+At this time, the order cannot be finalized yet. If you can confirm the exact catalog/SKU names for:
+- A3 glossy paper
+- A4 matte paper
+
+we can try again right away and confirm whether delivery by 2025-04-15 is still achievable."
+14,2025-04-09,44809.7,5190.299999999999,"Thanks — your order is partially in progress, but it cannot yet be confirmed for delivery by 2025-04-15.
+
+Status:
+- A4 paper: 5,000 sheets restock placed successfully, ETA 2025-04-16
+- Poster paper in various colors: cannot be finalized yet because the inventory system needs the exact catalog name
+- Cardstock: cannot be finalized yet because the inventory system needs the exact catalog name
+
+Please note the A4 delivery is one day later than requested, so the full order does not currently meet your deadline. If you can provide the exact product names for the poster paper and cardstock, we can recheck and proceed as far as possible."
+15,2025-04-12,44809.7,5190.299999999999,"Thanks for your request — I’ve checked availability and delivery timing.
+
+Unfortunately, all three requested items are currently out of stock, so we can’t fulfill the order from existing inventory as requested. In addition, the estimated delivery date for this size order is 2025-04-19, so your requested delivery date of 2025-04-15 isn’t feasible at this time.
+
+Items requested:
+- 10,000 sheets of A4 white paper
+- 5,000 sheets of A3 colored paper (assorted colors)
+- 500 reams of cardboard for signage
+
+If you’d like, I can help you proceed with the order for the next available delivery date or review possible alternatives."
+16,2025-04-13,44809.7,5190.299999999999,"I’m sorry, but I can’t confirm this order for delivery by April 15, 2025.
+
+Summary:
+- Inventory check: all three requested items were reported as out of stock, and the system could not place restock orders because the exact item names were not recognized.
+- Quote check: no valid quote could be produced because the item names were not found in the pricing/inventory system.
+- Sales check: the estimated delivery date for the full order is April 17, 2025, which is 2 days after your requested deadline.
+
+Requested items:
+- 500 sheets of A4 printer paper
+- 200 sheets of colorful construction paper
+- 100 sheets of poster board
+
+At this time, we cannot complete the order by April 15, 2025. If you’d like, we can help review alternate product names/SKUs or proceed if you can accept the later delivery date of April 17, 2025."
+17,2025-04-14,44809.7,5190.299999999999,"Thank you for your order request. Unfortunately, we can’t confirm fulfilment for delivery by 2025-04-15. Our inventory check showed all requested items as out of stock, and the requested product names could not be matched for restocking. In addition, the order size gives an estimated delivery date of 2025-04-21, which is later than requested.
+
+Requested items:
+- 1000 sheets of A4 white printer paper
+- 500 sheets of A3 colored paper (assorted colors)
+- 2000 white table napkins
+- 1000 biodegradable paper cups
+- 500 biodegradable paper plates
+
+If you’d like, we can help review alternative product names/specifications or a revised delivery date."
+18,2025-04-14,44809.7,5190.299999999999,"I’m sorry, but I couldn’t complete this order. The requested items are currently out of stock, and the earliest delivery date available is 2025-04-21, which is after your required date of 2025-04-15. If you’d like, I can help you explore alternative quantities or a modified order."
+19,2025-04-15,44809.7,5190.299999999999,"Thank you for your order request. At this time, all requested paper items are out of stock, so we’re unable to complete the order. In addition, the estimated delivery for this quantity would be 2025-04-22, which is later than your requested date of 2025-04-20. If you’d like, we can help explore alternative paper types, reduced quantities, or a future fulfillment date."
+20,2025-04-17,44809.7,5190.299999999999,"Thanks for your request. We checked availability and all three items are currently out of stock: 5,000 flyers, 2,000 posters, and 10,000 tickets. Because of that, we can’t confirm pricing or complete the order from current inventory yet.
+
+There is also a fulfillment risk against your requested delivery date of 2025-05-15 unless stock is replenished immediately. If you’d like, we can proceed as soon as replenishment or an alternate sourcing option is confirmed."
